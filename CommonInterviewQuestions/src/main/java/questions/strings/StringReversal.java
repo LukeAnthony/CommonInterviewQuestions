@@ -8,7 +8,7 @@ public class StringReversal {
 	 * Ex) 'Luke' --> 'ekuL', 'Andrew' --> 'werdnA'
 	 * 
 	 *  
-	 *  Complexity: O(N). Only need to iterate through the String's characters once
+	 *  Complexity: O(N) for both. Only need to iterate through the String's characters once
 	 */
 	private String evaluatee;
 	private StringBuilder reverseEvaluatee = new StringBuilder("");
