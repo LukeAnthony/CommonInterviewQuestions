@@ -11,9 +11,22 @@ public class StringReversal {
 	 *  Complexity: O(N). Only need to iterate through the String's characters once
 	 */
 	private String evaluatee;
+	private StringBuilder reverseEvaluatee = new StringBuilder("");
 	
 	public StringReversal(String evaluatee){
 		this.evaluatee = evaluatee;
+	}
+	
+	public StringBuilder evaluateeToStringBuilder(){
+		return new StringBuilder(evaluatee);
+	}
+	
+	public void setEvaluatee(String evaluatee){
+		this.evaluatee = evaluatee;
+	}
+	
+	public String getEvaluatee(){
+		return evaluatee;
 	}
 	
 	public StringBuilder iterativeReversal(){
@@ -26,14 +39,25 @@ public class StringReversal {
 		return reversedEvaluatee;
 	}
 	
-	public String recursiveReversal(int i){
-		
-		return recursiveReversal(i-1);
+	public StringBuilder recursiveReversal(StringBuilder evaluatee){
+		if(evaluatee.length() == 0)
+			return reverseEvaluatee;
+		else{
+			reverseEvaluatee.append(evaluatee.charAt(evaluatee.length()-1));
+			evaluatee = evaluatee.deleteCharAt(evaluatee.length()-1);
+			return recursiveReversal(evaluatee);
+		}
 	}
+
 	
 	public static void main(String[] args) {
 		StringReversal test = new StringReversal("Andrew");
 		System.out.println(test.iterativeReversal());
+		test.setEvaluatee("Luke");
+		System.out.println(test.recursiveReversal(test.evaluateeToStringBuilder()));
+
+
+
 
 	}
 }
