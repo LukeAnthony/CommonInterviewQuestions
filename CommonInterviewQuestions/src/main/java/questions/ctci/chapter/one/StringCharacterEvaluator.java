@@ -13,8 +13,7 @@ package questions.ctci.chapter.one;
  *
  */
 public class StringCharacterEvaluator {
-
-  
+ 
   public static void main(String[] args) {
     String subject = "Luke".toUpperCase(); //obviously does not contain all unique characters
     

@@ -27,9 +27,5 @@ public class Node<T extends Comparable<T>> {
     this.nextNode=nextNode;
     setNextNode(null);
   }
-  
-  public T getData(){
-    return data;
-  }
-
+ 
 }
