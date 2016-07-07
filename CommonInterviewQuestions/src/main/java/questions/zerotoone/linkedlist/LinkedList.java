@@ -9,6 +9,9 @@ public class LinkedList {
   @Getter @Setter
   private Node head;
   
+  @Getter @Setter
+  private Node lastNode;
+    
   public LinkedList(){
     
   }
@@ -31,6 +34,7 @@ public class LinkedList {
     }
     listTraverser.setNextNode(node);
     }
+    lastNode = node;
   }
   
   public Comparable pop(){
@@ -46,6 +50,29 @@ public class LinkedList {
    }
    
     return headData;
+  }
+  
+  //splits the current list into two and returns the new second List. If the list has an odd number
+  //of elements, the first new list will have an extra element
+  public LinkedList frontBackSplit(){
+    Node fastIterator = head;
+    Node slowIterator = head;
+    while(fastIterator != null){
+      fastIterator = fastIterator.getNextNode();
+      if(fastIterator == null){
+        break;
+      }
+      fastIterator = fastIterator.getNextNode();
+      if(fastIterator != null){
+        slowIterator = slowIterator.getNextNode();
+      }
+    }
+    
+    LinkedList secondHalf = new LinkedList();
+    secondHalf.setHead(slowIterator.getNextNode());
+    slowIterator.setNextNode(null);
+    return secondHalf;
+    
   }
   
   public void deleteListContents(){
@@ -74,11 +101,7 @@ public class LinkedList {
       head = nodeToBeInserted;
     }
     else if(position > this.countNodes()){ 
-      Node placeholder = head;
-      while(placeholder.getNextNode() != null){
-        placeholder = head.getNextNode();
-      }
-      placeholder.setNextNode(nodeToBeInserted);
+     addNodeToEndOfList(nodeToBeInserted);
     }
     else{
       int counter = 1; Node placeholder = head;
@@ -92,6 +115,14 @@ public class LinkedList {
     }
   }
   
+  //appends the second list to the end of this list
+  public void appendSecondList(LinkedList secondList){
+    if(secondList == null);
+    else
+      this.lastNode.setNextNode(secondList.getHead());
+  }
+  
+  //refactor. below works but can be more efficient
   public void sortedInsert(Node nodeToBeInserted){
     if(head==null)this.head=nodeToBeInserted;
     else{
@@ -105,7 +136,13 @@ public class LinkedList {
     
     }
       else{
-        
+        if(placeholder.getData().compareTo(nodeToBeInserted.getData() )> 0){
+          nodeToBeInserted.setNextNode(head);
+          head = nodeToBeInserted;
+        }
+        else{
+          head.setNextNode(nodeToBeInserted);
+        }
       }
     }
   
@@ -124,21 +161,7 @@ public class LinkedList {
       count++;
       listTraverser = listTraverser.getNextNode();
     }
-    System.out.println(count);
     return count;
   } 
-  
-  public static void main(String[] ar){
-    Node<String> node1 = new Node("First");
-    LinkedList llist = new LinkedList();
-    llist.addNodeToEndOfList(node1);
-    Node<String> node2 = new Node("Second");
-    llist.addNodeToEndOfList(node2);
-    Node<String> node3 = new Node("Third");
-    llist.addNodeToEndOfList(node3);
-    Node<String> node4 = new Node("Fourth");
-    llist.addNodeToEndOfList(node4);
-    System.out.println(llist.getNthNode(1));
-  }
 
 }

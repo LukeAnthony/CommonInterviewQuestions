@@ -47,8 +47,36 @@ public class LinkedListTest {
   @Test
   public void testSortedInsert(){
     LinkedList list = new LinkedList();
-    list.sortedInsert(new Node(1));
     list.sortedInsert(new Node(2));
+    System.out.println(list.getHead().getData());
+    list.sortedInsert(new Node(1));
+    System.out.println(list.getHead().getData());
     assertEquals(list.pop(), 1);
+  }
+  
+  @Test
+  public void testAppendSecondList(){
+    LinkedList listOne = new LinkedList();
+    listOne.addNodeToEndOfList(new Node("1"));
+    listOne.addNodeToEndOfList(new Node("2"));
+    LinkedList listTwo = new LinkedList();
+    listOne.addNodeToEndOfList(new Node("3"));
+    listOne.addNodeToEndOfList(new Node("4"));
+    listOne.appendSecondList(listTwo);
+    assertEquals(listOne.getNthNode(3),"3");
+  }
+  
+  @Test
+  public void testFrontBackSplit(){
+    LinkedList listOne = new LinkedList();
+    listOne.addNodeToEndOfList(new Node("1"));
+    listOne.addNodeToEndOfList(new Node("2"));
+    listOne.addNodeToEndOfList(new Node("3"));
+    listOne.addNodeToEndOfList(new Node("4"));
+    listOne.addNodeToEndOfList(new Node("5"));
+    LinkedList listTwo = listOne.frontBackSplit();
+    assertEquals(listTwo.getHead().getData(), "4");
+    assertEquals(listTwo.countNodes(), 2);
+    assertEquals(listOne.countNodes(), 3);
   }
 }
