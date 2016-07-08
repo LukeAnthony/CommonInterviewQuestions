@@ -148,6 +148,26 @@ public class LinkedList {
   
   }
   
+  //look at every element and remove duplicate elements. assumes that the list is sorted.
+  public void remodeDuplicates(){
+    if(this.head == null);
+    else if(this.head.getNextNode() == null);
+    else{
+      Node ahead = head.getNextNode(); Node behind = head;
+      while(ahead != null){
+        if(ahead.getData() == behind.getData()){
+          behind.setNextNode(ahead.getNextNode());
+          ahead.setNextNode(null);
+          ahead = behind.getNextNode();
+        }
+        else{
+          ahead = ahead.getNextNode(); behind = behind.getNextNode();
+        }
+        
+      }
+    }
+  }
+  
   public int countNodes(){
     int count = 0;
     if(this.head != null){

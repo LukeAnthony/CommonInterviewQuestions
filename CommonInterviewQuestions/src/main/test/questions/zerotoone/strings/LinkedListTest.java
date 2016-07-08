@@ -79,4 +79,21 @@ public class LinkedListTest {
     assertEquals(listTwo.countNodes(), 2);
     assertEquals(listOne.countNodes(), 3);
   }
+  
+  @Test
+  public void testRemoveDuplicates(){
+    LinkedList list = new LinkedList();
+    list.addNodeToEndOfList(new Node("0"));
+    list.addNodeToEndOfList(new Node("0"));
+    list.addNodeToEndOfList(new Node("1"));
+    list.addNodeToEndOfList(new Node("1"));
+    list.addNodeToEndOfList(new Node("1"));
+    list.addNodeToEndOfList(new Node("2"));
+    list.remodeDuplicates();
+    assertEquals(list.pop(), "0");
+    assertEquals(list.pop(), "1");
+    assertEquals(list.pop(), "2");
+  }
+  
+  //you're 1.5 minutes into lecture 14
 }
