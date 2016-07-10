@@ -3,6 +3,8 @@ package questions.zerotoone.strings;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+import questions.zerotoone.linkedlist.DoublyLinkedList;
 import questions.zerotoone.linkedlist.LinkedList;
 import questions.zerotoone.linkedlist.Node;
 
@@ -19,6 +21,14 @@ public class LinkedListTest {
     assertEquals(list.pop(), (Comparable) "Second");
     assertNull(list.pop());
     
+  }
+  
+  @Test
+  public void testFindNode(){
+    LinkedList list = new LinkedList();
+    list.addNodeToEndOfList(new Node("first"));
+    list.addNodeToEndOfList(new Node("second"));
+    assertNotNull(list.findNode("second"));
   }
   
   @Test
@@ -95,5 +105,29 @@ public class LinkedListTest {
     assertEquals(list.pop(), "2");
   }
   
-  //you're 1.5 minutes into lecture 14
-}
+  @Test
+  public void testReverseList(){
+    LinkedList list = new LinkedList();
+    list.addNodeToEndOfList(new Node(1));
+    list.addNodeToEndOfList(new Node(2));
+    list.addNodeToEndOfList(new Node(3));
+    list.reverseList();
+    assertEquals(list.pop(), 3);
+    assertEquals(list.pop(), 2);
+    assertEquals(list.pop(), 1);
+    assertEquals(list.pop(), null);
+    assertEquals(list.pop(), null);
+  }
+  
+  @Test
+  public void testDoublyLinkedList(){
+    DoublyLinkedList dlist = new DoublyLinkedList();
+    dlist.addNodeToEndOfList(new Node(1));
+    dlist.addNodeToEndOfList(new Node(2));
+    assertEquals(dlist.pop(), 1);
+    assertEquals(dlist.pop(), 2);
+    assertNull(dlist.pop());
+    assertNull(dlist.pop());
+    assertNull(dlist.pop());
+  }
+ }

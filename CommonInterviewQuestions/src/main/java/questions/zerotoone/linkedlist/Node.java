@@ -13,6 +13,9 @@ public class Node<T extends Comparable<T>> {
   
   @Getter @Setter
   private Node nextNode;
+  
+  @Getter @Setter
+  private Node previousNode;
 
   public Node(){
     setNextNode(null);
