@@ -19,4 +19,5 @@ public class GeneralTests {
     assertTrue(test.isPalindrome("a a a"));
     assertFalse(test.isPalindrome("assba"));
   }
+  
 }
