@@ -1,5 +1,7 @@
 package questions.zerotoone.sorts;
 
+
+
 /*
  * This class will contain my implementations of some of the most famous sort methods
  */
@@ -17,100 +19,172 @@ public class SortMethods {
    * 
    * Space Complexity: O(1) because no extra space is allocated for this method
    * 
-   * General Notes: Originally, I had integer variables for the smallest number and for its index in the array. I
-   *     would swap the smallest number at the end rather than swap all candidates like below. I believe
-   *     that this uses less memory, so is the implementation that I will go with.
+   * General Notes: Originally, I had integer variables for the smallest number and for its index in
+   * the array. I would swap the smallest number at the end rather than swap all candidates like
+   * below. I believe that this uses less memory, so is the implementation that I will go with.
    */
-  public static int[] selectionSort(int array[]){
+  public static int[] selectionSort(int array[]) {
     int length = array.length;
-    
-    for(int xthElementInArray = 0; xthElementInArray < length; xthElementInArray++){
+
+    for (int xthElementInArray = 0; xthElementInArray < length; xthElementInArray++) {
       int placeholder = 0;
-      for(int elementComparison = xthElementInArray + 1; elementComparison < length; elementComparison++){
-        if(array[elementComparison] < array[xthElementInArray]){
-          placeholder =  array[xthElementInArray];
+      for (int elementComparison =
+          xthElementInArray + 1; elementComparison < length; elementComparison++) {
+        if (array[elementComparison] < array[xthElementInArray]) {
+          placeholder = array[xthElementInArray];
           array[xthElementInArray] = array[elementComparison];
           array[elementComparison] = placeholder;
         }
       }
     }
-    
-   
-    
     return array;
   }
-  
+
   /*
-   * Bubble sort iterates through the array and compares each element's neighbor. If the element is greater 
-   *    than its neighbor, then the two are swapped. It continues to iterate through the array until 
-   *    no swaps are made, meaning that the array is sorted.
-   *    
-   * Efficiency: Worst case is O(N2). Best is O(N) when list is already sorted
-   *    ex) {9,8,7,6} -> {8,7,6,9} -> {7,6,8,9} -> {6,7,8,9}. Four iterations w/ four elements =
-   *        16 comparisons, making it O(N2)
-   *    
+   * Bubble sort iterates through the array and compares each element's neighbor. If the element is
+   * greater than its neighbor, then the two are swapped. It continues to iterate through the array
+   * until no swaps are made, meaning that the array is sorted.
+   * 
+   * Efficiency: Worst case is O(N2). Best is O(N) when list is already sorted ex) {9,8,7,6} ->
+   * {8,7,6,9} -> {7,6,8,9} -> {6,7,8,9}. Four iterations w/ four elements = 16 comparisons, making
+   * it O(N2)
+   * 
    * Stable? Yes!
    * 
    * Space Complexity: O(1)
    * 
-   * General Notes: You could do without the while loop and use a for loop instead. 
+   * General Notes: You could do without the while loop and use a for loop instead.
    */
-  public static int[] bubbleSort(int array[]){
-    int length = array.length; boolean swapThisIteration = true;
-    
-    while(swapThisIteration == true){
+  public static int[] bubbleSort(int array[]) {
+    int length = array.length;
+    boolean swapThisIteration = true;
+
+    while (swapThisIteration == true) {
       swapThisIteration = false;
-      for(int index = 0; index < length; index++){
-        if((index+1) != length && array[index] > array[index+1] ){
+      for (int index = 0; index < length; index++) {
+        if ((index + 1) != length && array[index] > array[index + 1]) {
           int placeholder = array[index];
-          array[index] = array[index+1];
-          array[index+1] = placeholder;
+          array[index] = array[index + 1];
+          array[index + 1] = placeholder;
           swapThisIteration = true;
         }
       }
     }
     return array;
   }
-  
+
   /*
-   * Insertion sort begins its sort with a sorted sub-list with one element (a list with one element is
-   *    always sorted). You move throughout the array and add elements to this list, sorting the list
-   *    once they are added
+   * Insertion sort begins its sort with a sorted sub-list with one element (a list with one element
+   * is always sorted). You move throughout the array and add elements to this list, sorting the
+   * list once they are added
    * 
    * Efficiency: O(N2)
    * 
-   * Stable? No
+   * Stable? Yes
    * 
    * Space Complexity: O(1)
    * 
-   * General Notes: Original is not insertion sort. Right idea, but swapping from left to right isn't what
-   *    the algorithm does. You should move the backOfList element from right to left, comparing the 
-   *    latest addition of the list to all prior entries. Original is stable.
+   * General Notes: Original is not insertion sort. Right idea, but swapping from left to right
+   * isn't what the algorithm does. You should move the backOfList element from right to left,
+   * comparing the latest addition of the list to all prior entries. Original is stable.
    */
-  public static int[] insertionSort(int array[]){
+  public static int[] insertionSort(int array[]) {
     int length = array.length;
-    
-    /*   Original Implementation
-     * for(int backOfList = 0; backOfList < length; backOfList++){
-        for(int frontOfList = 0; frontOfList < backOfList; frontOfList++ ){
-          if(array[frontOfList] > array[backOfList]){
-            int placeHolder = array[frontOfList];
-            array[frontOfList] = array[backOfList];
-            array[backOfList] = placeHolder;
+
+    /*
+     * Original Implementation for(int backOfList = 0; backOfList < length; backOfList++){ for(int
+     * frontOfList = 0; frontOfList < backOfList; frontOfList++ ){ if(array[frontOfList] >
+     * array[backOfList]){ int placeHolder = array[frontOfList]; array[frontOfList] =
+     * array[backOfList]; array[backOfList] = placeHolder; } } }
+     */
+
+    for (int listFrontier = 1; listFrontier < length; listFrontier++) {
+      for (int backOfList = listFrontier; backOfList > 0; backOfList--) {
+        if (array[backOfList] < array[backOfList - 1]) {
+          int placeHolder = array[backOfList];
+          array[backOfList] = array[backOfList - 1];
+          array[backOfList - 1] = placeHolder;
         }
       }
-    }*/
-    
-    for(int listFrontier = 1; listFrontier < length; listFrontier++){
-        for(int listTraversalIndex = listFrontier; listTraversalIndex > 0; listTraversalIndex--){
-          if(array[listTraversalIndex] < array[listTraversalIndex-1]){
-            int placeHolder = array[listTraversalIndex];
-            array[listTraversalIndex] = array[listTraversalIndex-1];
-            array[listTraversalIndex-1] = placeHolder;
-          }
-        }
     }
     return array;
   }
 
+  private static void splitForMergeSort(int originalList[], int firstHalf[], int secondHalf[]){
+    int index = 0;
+    int secondHalfIndex = firstHalf.length;
+    for(int elements: originalList){
+      if(index < secondHalfIndex){
+        firstHalf[index] = originalList[index];
+      }
+      else{
+        secondHalf[index-secondHalfIndex] = originalList[index];
+       
+      }
+      index++;
+    }
+  }
+  
+  //combines final two sorted lists and sorts them into the final product
+  private static int[] mergeForMergeSort(int originalList[], int firstHalf[], int secondHalf[]){
+    int mergeIndex=0,firstHalfIndex=0,secondHalfIndex=0;
+    
+    while(firstHalfIndex < firstHalf.length && secondHalfIndex < secondHalf.length){
+      if(firstHalf[firstHalfIndex] < secondHalf[secondHalfIndex]){
+        originalList[mergeIndex] = firstHalf[firstHalfIndex];
+        firstHalfIndex++;
+      }
+      else if(secondHalfIndex < secondHalf.length){
+        originalList[mergeIndex] = secondHalf[secondHalfIndex];
+        secondHalfIndex++;
+      }
+      mergeIndex++;
+    }
+    
+    if(firstHalfIndex < firstHalf.length){
+      while(mergeIndex < originalList.length){
+        originalList[mergeIndex++] = firstHalf[firstHalfIndex++];
+      }
+    }
+    
+    if(secondHalfIndex < secondHalf.length){
+      while(mergeIndex < originalList.length){
+        originalList[mergeIndex++] = secondHalf[secondHalfIndex++];
+      }
+    }
+    
+    return null;
+  }
+
+  /*
+   * Merge sort
+   * 
+   * Efficiency: O(N log(N))
+   * 
+   * Stable? Yes!
+   * 
+   * Space Complexity: O(N)
+   * 
+   * General Notes:
+   */
+  public static void mergeSort(int list[]) {
+    if(list.length==1){
+      return;
+    }
+    
+    int centerIndex = list.length/2 + list.length%2;
+    int firstHalf[] = new int[centerIndex];
+    int secondHalf[] = new int[list.length - centerIndex];
+    splitForMergeSort(list, firstHalf, secondHalf);
+    
+    mergeSort(firstHalf);
+    mergeSort(secondHalf);
+
+    mergeForMergeSort(list, firstHalf, secondHalf);
+    System.out.println("printing out list contents");
+    for(int i : list){
+      System.out.println(i);
+    }
+    System.out.println();
+  }
 }
