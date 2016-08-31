@@ -26,10 +26,19 @@ public class SortTest {
   }
   
   @Test
+  @Ignore
   public void testMergeSort(){
     int array[] = {5,4,6,2,1}; 
     int expectedArray[] = {1,2,4,5,6};
     mergeSort(array);
+    assertArrayEquals(expectedArray, array);
+  }
+  
+  @Test
+  public void testQuickSort(){
+    int array[] = {3,1,2,4,5,0}; 
+    int expectedArray[] = {0,1,2,3,4,5};
+    quickSortCaller(array);
     assertArrayEquals(expectedArray, array);
   }
   

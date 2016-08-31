@@ -109,7 +109,34 @@ public class SortMethods {
     }
     return array;
   }
+  
+  /*
+   * Merge sort
+   * 
+   * Efficiency: O(N log(N))
+   * 
+   * Stable? Yes!
+   * 
+   * Space Complexity: O(N)
+   * 
+   * General Notes: This was a nightmare to code
+   */
+  public static void mergeSort(int list[]) {
+    if(list.length==1){
+      return;
+    }
+    int firstHalf[] = new int[list.length/2 + list.length%2];
+    int secondHalf[] = new int[list.length/2];
+    
+    splitForMergeSort(list, firstHalf, secondHalf);
+    
+    mergeSort(firstHalf);
+    mergeSort(secondHalf);
+    
+    mergeForMergeSort(list, firstHalf, secondHalf);
 
+  }
+  
   private static void splitForMergeSort(int originalList[], int firstHalf[], int secondHalf[]){
     int index = 0;
     int secondHalfIndex = firstHalf.length;
@@ -156,35 +183,52 @@ public class SortMethods {
     return null;
   }
 
+
   /*
-   * Merge sort
+   * Quick sort
    * 
-   * Efficiency: O(N log(N))
+   * Efficiency: O(N log(N)) in most cases, worst case is O(N2)
    * 
    * Stable? Yes!
    * 
-   * Space Complexity: O(N)
+   * Space Complexity: O(1)
    * 
-   * General Notes:
+   * General Notes: Uses a pivot to partition the list. Choose the first or last element as the first pivot.
+   *    Could also choose the pivot randomly. Put all elements smaller than the pivot to the left, larger to 
+   *    the right. This will partition the list into two parts. 
    */
-  public static void mergeSort(int list[]) {
-    if(list.length==1){
-      return;
-    }
-    
-    int centerIndex = list.length/2 + list.length%2;
-    int firstHalf[] = new int[centerIndex];
-    int secondHalf[] = new int[list.length - centerIndex];
-    splitForMergeSort(list, firstHalf, secondHalf);
-    
-    mergeSort(firstHalf);
-    mergeSort(secondHalf);
-
-    mergeForMergeSort(list, firstHalf, secondHalf);
-    System.out.println("printing out list contents");
-    for(int i : list){
-      System.out.println(i);
-    }
-    System.out.println();
+  public static void quickSortCaller(int[] list){
+    quickSort(list,0,list.length-1);
   }
+  
+  public static void quickSort(int[] list, int low, int high){
+    if(low >= high) return ;
+    int pivotIndex = quickSortPartition(list, low, high);
+    quickSort(list, low, pivotIndex-1);
+    quickSort(list, pivotIndex+1,high);
+  }
+  
+  public static void swap(int[] list, int low, int high){
+    int temp = list[low]; //low=3, high=10
+    list[low] = list[high];
+    list[high] = temp;
+  }
+
+  public static int quickSortPartition(int[] list, int lowIndex, int highIndex){
+    int pivot = list[lowIndex];
+    int l = lowIndex, h = highIndex;
+    while(l < h){
+      while(list[l] <= pivot && l < h){
+        l++;
+      }
+      while(list[h]>pivot){
+        h--;
+      }
+      if(l<h){
+        swap(list, l, h);
+      }
+    }
+    swap(list,lowIndex,h); 
+    return h;
+  } 
 }
